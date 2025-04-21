@@ -1,0 +1,63 @@
+// src/App.tsx
+import React, { useEffect, useState } from 'react';
+import StatusPanel from './components/StatusPanel';
+import PugPanel from './components/PugPanel';
+import './App.css';
+
+interface Status {
+  backend: string;
+  database: string;
+  api?: string;
+}
+
+const App: React.FC = () => {
+  const [status, setStatus] = useState<Status | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchStatus = async () => {
+  setLoading(true);
+
+    const check = async (url: string) => {
+      try {
+        const response = await fetch(url);
+        console.log(response)
+        return response.ok ? 'ok' : 'error';
+      } catch (e) {
+        return 'error';
+      }
+    };
+
+    const [backendStatus, apiStatus, dbStatus] = await Promise.all([
+      check('http://web-app:8080/health'), // backend health
+      check('http://web-app:8080/api'), // api health
+      check('http://web-app:8080/db-check'), // proxy к PostgreSQL
+    ]);
+
+    setStatus({
+      backend: backendStatus,
+      api: apiStatus,
+      database: dbStatus,
+    });
+
+    setLoading(false);
+    }; 
+
+  useEffect(() => {
+    fetchStatus();
+  }, []);
+
+  return (
+    <div className="main-window">
+      <div className="child panel">
+       <h1 className="text-3xl font-bold mb-8">🔧 DevOps Health Dashboard</h1>
+        <StatusPanel status={status!} loading={loading} fetchStatus={fetchStatus} />
+      </div>
+      <div className="child">
+        <PugPanel />
+      </div>
+    </div>
+  );
+};
+
+export default App;
+

@@ -1,0 +1,44 @@
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  width: 16rem; /* w-64 */
+}
+
+.status-icon {
+  font-size: 1.5rem; /* Adjust icon size */
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-name {
+  font-weight: 600;
+}
+
+.status-description {
+  font-size: 0.875rem; /* text-sm */
+}
+
+.status-ok .status-description {
+  color: #16a34a; /* text-green-600 */
+}
+
+.status-error .status-description {
+  color: #dc2626; /* text-red-600 */
+}
+
+.status-ok .status-icon {
+  color: #10b981; /* text-green-500 */
+}
+
+.status-error .status-icon {
+  color: #f87171; /* text-red-500 */
+}
+

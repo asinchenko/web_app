@@ -1,0 +1,45 @@
+.pug-container {
+  position: relative;
+  display: inline-block;
+}
+
+.pug-image {
+  width: 800px; /* Adjust the size of the pug image */
+  height: auto;
+  display: block;
+}
+
+.pug-eye {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  top: 36.8%;
+}
+
+.left-eye {
+  left: 34.5%;
+  background-image: url('../assets/eye.png');
+}
+
+.right-eye {
+  left: 60%;
+  background-image: url('../assets/eye.png');
+}
+
+.pug-eye:hover {
+  cursor: pointer;
+}
+
+/* Стиль для колбасы */
+.sausage {
+  position: absolute;
+  width: 120px; /* Размер колбасы */
+  height: 120px;
+  object-fit: contain;
+  pointer-events: none; /* Чтобы колбаса не мешала движению мыши */
+  transition: transform 0.1s ease;
+}
+
