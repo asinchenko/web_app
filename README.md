@@ -20,4 +20,25 @@ export WEB_APP_URL=mysite.local
 export WEB_APP_PORT=80
 
 envsubst < src/App.template.tsx > src/App.tsx
+```
 
+## App logic 
+
+This app will try to connect to 
+```
+http://WEB_APP_URL:WEB_APP_PORT 
+
+to /heath - to chech Backend API connection 
+to /db-check - to check PG connection over Backend API.
+```
+
+You should better use *Ingress NGINX* to set up the *WEB_APP_URL* routing.
+
+Abstract example: 
+
+```
+server mywebsite.local 80;
+/ -> to web_app service
+/health -> to web_backend service;
+/db-check -> to web_backend service;
+``` 
